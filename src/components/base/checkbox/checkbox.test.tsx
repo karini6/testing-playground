@@ -6,7 +6,7 @@ import Checkbox from './index';
 
 
 test('renders list of countries', () => {
-  render(<Checkbox countryName="Argentina"/>);
+  render(<Checkbox countryName="Argentina" checkboxName='Vil besøke'/>);
   const listElement = screen.getByRole('checkbox');
   userEvent.click(listElement)
   expect(listElement).toBeChecked()

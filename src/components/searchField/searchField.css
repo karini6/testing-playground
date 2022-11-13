@@ -1,4 +1,10 @@
 .countryNameSearchField {
     width: 10rem;
     height: 2rem;
+    text-align: left;
+}
+
+.searchFieldLabel {
+    display: block;
+    margin-bottom: 2rem;
 }
