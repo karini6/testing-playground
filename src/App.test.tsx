@@ -1,23 +1,41 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
-import SearchField from './components/searchField';
 import userEvent from '@testing-library/user-event';
 
-const handleChangeMock = () => {}
+describe('<App />', () => { 
+  it('renders start page', () => {
+    render(<App />);
+    const title = screen.getByText(/Traveller's planner/i);
+    const searchField = screen.getByLabelText(/Countries I want to visit/i)
+    expect(title).toBeInTheDocument();
+    expect(searchField).toBeInTheDocument()
+  });
 
-it('renders all components', () => {
-  render(<App />);
-  const title = screen.getByText(/Traveller's planner/i);
-  const searchField = screen.getByLabelText(/Countries I want to visit/i)
-  expect(title).toBeInTheDocument();
-  expect(searchField).toBeInTheDocument()
-});
+  it('allows user to search for countries', () => {
+    render(<App />);
+    const search = screen.getByRole('textbox',  {name: /Countries I want to visit/i})
+    expect(search).toBeEnabled()
+    userEvent.type(search, 'Norway')
+    expect(search).toHaveValue("Norway")
+  })
 
-it('allows user to search for countries', () => {
-  render(<SearchField handleChange={handleChangeMock} countryName="Norway"/>);
-  const search = screen.getByPlaceholderText(/Search for countries/i)
-  expect(search).toBeEnabled()
-  userEvent.type(search, 'Norway')
-  expect(search).toHaveValue("Norway")
+  it('shows list of countries on search', () => {
+    render(<App />);
+    userEvent.type(screen.getByPlaceholderText(/Search for countries/i), 'No')
+    const listOfSearchedCountries = screen.getByText('Norway')
+    expect(listOfSearchedCountries).toBeVisible()
+  })
+
+  it('checks off country on click', () => {
+    render(<App />)
+    const searchField = screen.getByRole('textbox', {name: /ountries I want to visit/i})
+    const searchResultTitle = screen.getByText(/matching countries:/i)
+    userEvent.type(searchField, 'Norway')
+    const searchResultItem = screen.getByRole('checkbox', { name: 'Norway' })
+    userEvent.click(searchResultItem)
+    expect(searchResultTitle).toBeVisible()
+    expect(searchResultItem).toBeChecked()
+  })
+
+  //* TODO: add test for persisting checked countries /
 })

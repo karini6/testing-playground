@@ -1,19 +1,29 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
+import useLocalStorage from '../../../hooks/useLocalStorage';
 
 type CheckboxValues = {
     countryName: string;
-    checkboxName: string;
-
+    isChecked: boolean;
 }
 
-function Checkbox({countryName, checkboxName}: CheckboxValues) {
-const [isChecked, setIsChecked] = useState(false)
+function Checkbox({countryName, isChecked}: CheckboxValues) {
+const [checked, setChecked] = useState(false)
+const {setCountriesInLocalStorage} = useLocalStorage()
 
-const handleChange = () => {
-    setIsChecked((prevValue) => !prevValue)
+useEffect(() => {
+    setChecked(isChecked)
+}, [isChecked])
+
+const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setChecked((prevValue) => !prevValue)
+    setCountriesInLocalStorage(e)
 }
+
     return (
-        <input type="checkbox" name={checkboxName} checked={isChecked} onChange={handleChange} value={countryName}/>
+        <label>
+        <input type="checkbox" name={countryName} checked={checked} onChange={(e) => handleChange(e)} value={countryName}/>
+        {countryName}
+        </label>
     )
 }
 
