@@ -37,5 +37,23 @@ describe('<App />', () => {
     expect(searchResultItem).toBeChecked()
   })
 
-  //* TODO: add test for persisting checked countries /
+  it('persists checked items on refresh', () => {
+    render(<App />)
+    const searchField = screen.getByRole('textbox', {name: /ountries I want to visit/i})
+    userEvent.type(searchField, 'Norway')
+    const searchResultItem = screen.getByRole('checkbox', { name: 'Norway' })
+    userEvent.type(searchField, 'Norway')
+    expect(searchResultItem).toBeChecked()
+  })
+
+  it('updates checked after unchecking', () => {
+    render(<App />)
+    const searchField = screen.getByRole('textbox', {name: /ountries I want to visit/i})
+    userEvent.type(searchField, 'Norway')
+    const searchResultItem = screen.getByRole('checkbox', { name: 'Norway' })
+    userEvent.type(searchField, 'Norway')
+    expect(searchResultItem).toBeChecked()
+    userEvent.click(searchResultItem)
+    expect(searchResultItem).not.toBeChecked()
+  })
 })

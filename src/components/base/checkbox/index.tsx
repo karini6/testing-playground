@@ -21,8 +21,8 @@ const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
 
     return (
         <label>
-        <input type="checkbox" name={countryName} checked={checked} onChange={(e) => handleChange(e)} value={countryName}/>
-        {countryName}
+            <input type="checkbox" name={countryName} checked={checked} onChange={(e) => handleChange(e)} value={countryName}/>
+            {countryName}
         </label>
     )
 }
