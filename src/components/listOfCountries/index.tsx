@@ -2,7 +2,7 @@ import { filteredCountryListType } from "../../types/types";
 import Checkbox from "../base/checkbox";
 
 type ListOfCountriesProps = {
-    countries: filteredCountryListType;
+    countries?: filteredCountryListType[];
 }
 
 export default function ListOfCountries({countries}: ListOfCountriesProps) {
