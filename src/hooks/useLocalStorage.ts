@@ -28,13 +28,7 @@ export default function useLocalStorage() {
             countryArray.push(e.currentTarget.value)
         }
         else {
-            try {
-                countryArray.filter(
-                    (country: string) => JSON.parse(country).id !== JSON.parse(e.currentTarget.value).id
-                )
-            } catch {
-                countryArray = countryArray.filter((country: string) => country !== e.currentTarget.value)
-            }
+            countryArray = countryArray.filter((country: string) => country !== e.currentTarget.value)
         }
         setSavedCountries(JSON.stringify(countryArray))
         localStorage.setItem('countries', JSON.stringify(countryArray))
