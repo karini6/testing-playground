@@ -7,21 +7,17 @@ type SearchFieldProps = {
 
 
 function SearchField({handleChange, countryName}: SearchFieldProps) {
-   
- 
-
-
     return (
         <>
             <label htmlFor="countryName" className='searchFieldLabel'>
-                Countries I want to visit
+                Search for countries
             </label>
             <input 
             name='countryName'
             id='countryName'
             className='countryNameSearchField' 
             type="text" 
-            placeholder='Search for countries' 
+            placeholder='Start typing...' 
             onChange={handleChange} 
             value={countryName}
             />

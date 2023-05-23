@@ -3,19 +3,22 @@ import Checkbox from "../base/checkbox";
 
 type ListOfCountriesProps = {
     countries?: filteredCountryListType[];
+    placeholderText?: string;
 }
 
-export default function ListOfCountries({countries}: ListOfCountriesProps) {
+export default function ListOfCountries({countries, placeholderText}: ListOfCountriesProps) {
+    console.log("placeholderText: ", placeholderText)
     return (
         <>
         <h2>Matching countries:</h2>
-        {Array.isArray(countries) && countries.length > 0 ? countries.map((country: any) => {
-            return (
+        {Array.isArray(countries) && countries.length > 0 && countries.map((country: any) =>  (
                 <div key={country.key}>
                     <Checkbox isChecked={country.isChecked} countryName={country.countryName} key={country.key}/>
                 </div>
             )
-        }) : <h3>Oops, no matches! Try again!</h3>}
+        ) 
+        }
+        <h3>{placeholderText}</h3>
         </>
     )
 }

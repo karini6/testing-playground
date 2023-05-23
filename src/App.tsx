@@ -1,27 +1,33 @@
 import React, { useEffect, useState } from 'react';
+
+import {filteredCountryListType}  from './types/types';
+
 import './App.css';
 import ListOfCountries from './components/listOfCountries';
 import SearchField from './components/searchField/index';
 import useLocalStorage from './hooks/useLocalStorage';
-import {filteredCountryListType}  from './types/types';
 import useGetCountries from './hooks/useGetCountries';
+import { countryMock as countriesMock } from './mocks/countriesMock';
 
 
 
 function App() {
-
   const [countryName, setCountryName] = useState<string>('')
   const [filteredCountryList, setFilteredCountryList] = useState<filteredCountryListType[]>([])
-  
   const {savedCountries, getCountriesFromLocalStorage} = useLocalStorage()
-  const {getCountries, countryList} = useGetCountries()
+  const {countryList, setCountryList} = useGetCountries()
+  const placeholderText = countryName ? "Oops, no matches! Try again." : "Type to see suggestions"
 
 
     useEffect(() => {
-      getCountries()
       getCountriesFromLocalStorage()
+      setCountryList(countriesMock.map(a => a.name))
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    console.log("filteredCountryList: ", filteredCountryList)
+  })
 
  
 let countryArray: filteredCountryListType[] = []
@@ -43,7 +49,7 @@ let countryArray: filteredCountryListType[] = []
         Traveller's planner
       </header>
       <SearchField handleChange={handleInputChange} countryName={countryName}/>
-      <ListOfCountries countries={filteredCountryList}/>
+      <ListOfCountries countries={filteredCountryList} placeholderText={placeholderText}/>
     </div>
   );
 }

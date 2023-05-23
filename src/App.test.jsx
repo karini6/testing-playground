@@ -22,41 +22,41 @@ describe('<App />', () => {
     expect(search).toHaveValue("Norway")
   })
 
-  // it('shows list of countries on search', () => {
-  //   render(<App />);
-  //   userEvent.type(screen.getByPlaceholderText(/Search for countries/i), 'No')
-  //   const listOfSearchedCountries = screen.getByText('Norway')
-  //   expect(listOfSearchedCountries).toBeVisible()
-  // })
+  it('shows list of countries on search', () => {
+    render(<App />);
+    userEvent.type(screen.getByPlaceholderText(/Start typing/i), 'No')
+    const listOfSearchedCountries = screen.getByText(/Matching countries/i)
+    expect(listOfSearchedCountries).toBeVisible()
+  })
 
-  // it('checks off country on click', () => {
-  //   render(<App />)
-  //   const searchField = screen.getByRole('textbox', {name: /ountries I want to visit/i})
-  //   const searchResultTitle = screen.getByText(/matching countries:/i)
-  //   userEvent.type(searchField, 'Norway')
-  //   const searchResultItem = screen.getByRole('checkbox', { name: 'Norway' })
-  //   userEvent.click(searchResultItem)
-  //   expect(searchResultTitle).toBeVisible()
-  //   expect(searchResultItem).toBeChecked()
-  // })
+  it('checks off country on click', () => {
+    render(<App />)
+    const searchField = screen.getByRole('textbox', {name: /ountries I want to visit/i})
+    const searchResultTitle = screen.getByText(/matching countries:/i)
+    userEvent.type(searchField, 'Norway')
+    const searchResultItem = screen.getByRole('checkbox', { name: 'Norway' })
+    userEvent.click(searchResultItem)
+    expect(searchResultTitle).toBeVisible()
+    expect(searchResultItem).toBeChecked()
+  })
 
-  // it('persists checked items on refresh', () => {
-  //   render(<App />)
-  //   const searchField = screen.getByRole('textbox', {name: /ountries I want to visit/i})
-  //   userEvent.type(searchField, 'Norway')
-  //   const searchResultItem = screen.getByRole('checkbox', { name: 'Norway' })
-  //   userEvent.type(searchField, 'Norway')
-  //   expect(searchResultItem).toBeChecked()
-  // })
+  it('persists checked items on refresh', () => {
+    render(<App />)
+    const searchField = screen.getByRole('textbox', {name: /ountries I want to visit/i})
+    userEvent.type(searchField, 'Norway')
+    const searchResultItem = screen.getByRole('checkbox', { name: 'Norway' })
+    userEvent.type(searchField, 'Norway')
+    expect(searchResultItem).toBeChecked()
+  })
 
-  // it('updates checked after unchecking', () => {
-  //   render(<App />)
-  //   const searchField = screen.getByRole('textbox', {name: /ountries I want to visit/i})
-  //   userEvent.type(searchField, 'Norway')
-  //   const searchResultItem = screen.getByRole('checkbox', { name: 'Norway' })
-  //   userEvent.type(searchField, 'Norway')
-  //   expect(searchResultItem).toBeChecked()
-  //   userEvent.click(searchResultItem)
-  //   expect(searchResultItem).not.toBeChecked()
-  // })
+  it('updates checked after unchecking', () => {
+    render(<App />)
+    const searchField = screen.getByRole('textbox', {name: /ountries I want to visit/i})
+    userEvent.type(searchField, 'Norway')
+    const searchResultItem = screen.getByRole('checkbox', { name: 'Norway' })
+    userEvent.type(searchField, 'Norway')
+    expect(searchResultItem).toBeChecked()
+    userEvent.click(searchResultItem)
+    expect(searchResultItem).not.toBeChecked()
+  })
 })
