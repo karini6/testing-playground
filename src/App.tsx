@@ -25,9 +25,7 @@ function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(() => {
-    console.log("filteredCountryList: ", filteredCountryList)
-  })
+
 
  
 let countryArray: filteredCountryListType[] = []

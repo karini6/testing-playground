@@ -7,18 +7,16 @@ type ListOfCountriesProps = {
 }
 
 export default function ListOfCountries({countries, placeholderText}: ListOfCountriesProps) {
-    console.log("placeholderText: ", placeholderText)
     return (
         <>
         <h2>Matching countries:</h2>
-        {Array.isArray(countries) && countries.length > 0 && countries.map((country: any) =>  (
+        {Array.isArray(countries) && countries.length > 0 ? countries.map((country: any) =>  (
                 <div key={country.key}>
                     <Checkbox isChecked={country.isChecked} countryName={country.countryName} key={country.key}/>
                 </div>
             )
-        ) 
-        }
-        <h3>{placeholderText}</h3>
+        ) :
+         <h3>{placeholderText}</h3>}
         </>
     )
 }
